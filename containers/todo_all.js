@@ -6,8 +6,7 @@ import NewToDo from '../components/new_todo';
 import AddToDoButton from '../components/add_todo_button';
 import ToDoItem from "../components/todo_item";
 import { connect } from 'react-redux';
-import { addTodo, deleteTodo, updateTodo, getAll } from "../store/reducers/todo_reducer";
-import {fetchToDos} from "../store/reducers/todo_reducer";
+import {fetchToDos, deleteTask, updateTask} from "../store/reducers/todo_reducer";
 class ToDoAll extends React.Component {
 
 
@@ -52,17 +51,15 @@ class ToDoAll extends React.Component {
       return <Text>Loading...</Text>
     }
 
-
     let listItm = [];
-    alert(todos[0].id);
     if (todos.length > 0) {
       let scrTodos = this.screenFilterTodos();
       listItm = scrTodos.map((todos, index) =>
         <ToDoItem
           key={index}
           todo={todos}
-          deleteTodo={deleteTodo}
-          updateTodo={updateTodo}
+          deleteTodo={this.props.deleteTask}
+          updateTodo={this.props.updateTask}
         />
       );
     }
@@ -84,12 +81,14 @@ class ToDoAll extends React.Component {
 
 const mapStateToProps = state => ({
     todos:state.todo_reducer.todos,
-    loading: false,
-    error:null
+    loading: state.todo_reducer.loading,
+    error:state.todo_reducer.error
 });
 
 const mapDispatchToProps =  {
-    fetchToDos
+    fetchToDos,
+    deleteTask,
+    updateTask
 }
 
 export default connect(
