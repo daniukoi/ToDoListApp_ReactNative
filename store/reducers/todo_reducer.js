@@ -51,6 +51,15 @@ export default function todo_reducer(state = initialState, action) {
                 ...state,
                 todos: [...todos],
             }
+        case ADD_TODO:
+            let todos = [...state.todos, action.payload.todo];
+            return{
+                ...state,
+                todos:[...todos]
+            }
+
+
+
         default:
             return state;
     }

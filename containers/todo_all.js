@@ -6,7 +6,7 @@ import NewToDo from '../components/new_todo';
 import AddToDoButton from '../components/add_todo_button';
 import ToDoItem from "../components/todo_item";
 import { connect } from 'react-redux';
-import {fetchToDos, deleteTask, updateTask} from "../store/reducers/todo_reducer";
+import {fetchToDos, deleteTask, updateTask, AddTask} from "../store/reducers/todo_reducer";
 class ToDoAll extends React.Component {
 
 
@@ -88,7 +88,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps =  {
     fetchToDos,
     deleteTask,
-    updateTask
+    updateTask,
+    AddTask
 }
 
 export default connect(
