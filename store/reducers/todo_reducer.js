@@ -59,7 +59,7 @@ export default function todo_reducer(state = initialState, action) {
 export function addTodo(todo) {
     return {
         type: ADD_TODO,
-        todo,
+        payload: {todo},
     };
 }
 
@@ -114,13 +114,14 @@ export function fetchToDos() {
 }
 
 export function deleteTask(todo) {
+    let todoBase = {completed:todo.completed, task:todo.task}
+    alert(todoBase.completed);
     return dispatch => {
-        return fetch("http://10.211.55.5:44335/api/todo/delete", {
+        return fetch("http://10.211.55.5:44335/api/todo/Delete?Completed="+todo.completed+"&Task="+todo.task+"&Id="+todo.id, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(todo)
         })
             .then(() => dispatch(deleteTodo(todo)))
     }
@@ -139,9 +140,21 @@ export function updateTask(todo) {
     }
 }
 
+export function AddTask(todo){
+    return dispatch => {
+        return fetch("http://10.211.55.5:44335/api/todo/AddToDoItem?Completed="+todo.completed+"&Task="+todo.task, {
+            method:'POST',
+            headers: {
+                "Content-Type": "application/json"
+            }
+    })
+    .then(()=>dispatch(addTodo(todo)))
+}
+
 function handleErrors(response) {
     if (!response.ok) {
         throw Error(response.statusText);
     }
     return response;
+}
 }
