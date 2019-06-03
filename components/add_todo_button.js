@@ -5,7 +5,7 @@ export default class AddToDoButton extends React.Component{
     render(){
         const { onAddNewToDo } = this.props;
         return(
-            <Container>        
+            <Container style={{height:100}}>        
                 <Fab
                     style={{ backgroundColor: '#5067FF' }}
                     position="bottomRight"

@@ -6,14 +6,14 @@ export default class NewToDo extends React.Component {
 
     constructor(props) {
         super(props);
-        const title = "";
+        const task = "";
         const completed = false;
-        const createdAt = "";
+        
 
         this.state = {
-            todos: [],
-            loading,
-            error
+            task,
+            completed,
+            
         };
     }
 
@@ -24,7 +24,7 @@ export default class NewToDo extends React.Component {
     }
 
     render() {
-        const { completed, title } = this.state;
+        const { completed } = this.state;
         const { onPress, onCancel } = this.props;
         return (
             <ListItem>
@@ -34,13 +34,13 @@ export default class NewToDo extends React.Component {
                 />
                 <Body>
                     <Input placeholder="What needs to be done?"
-                        onChangeText={(txt) => this.setStateUtil("title", txt)}
+                        onChangeText={(txt) => this.setStateUtil("task", txt)}
                         onSubmitEditing={() => onPress(this.state)}
                     />
                 </Body>
                 <Button
                     transparent
-                    onPress={() => onCancel(show = false)}
+                    onPress={() => onCancel(show=false)}
                 >
                     <Icon name={'trash'} />
                 </Button>

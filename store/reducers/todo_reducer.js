@@ -52,10 +52,10 @@ export default function todo_reducer(state = initialState, action) {
                 todos: [...todos],
             }
         case ADD_TODO:
-            let todos = [...state.todos, action.payload.todo];
+            let tasks = [...state.todos, action.payload.todo];
             return{
                 ...state,
-                todos:[...todos]
+                todos:[...tasks]
             }
 
 
@@ -150,6 +150,7 @@ export function updateTask(todo) {
 }
 
 export function AddTask(todo){
+    alert(todo.task);
     return dispatch => {
         return fetch("http://10.211.55.5:44335/api/todo/AddToDoItem?Completed="+todo.completed+"&Task="+todo.task, {
             method:'POST',
@@ -159,11 +160,11 @@ export function AddTask(todo){
     })
     .then(()=>dispatch(addTodo(todo)))
 }
+}
 
 function handleErrors(response) {
     if (!response.ok) {
         throw Error(response.statusText);
     }
     return response;
-}
 }
